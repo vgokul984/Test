@@ -17,14 +17,7 @@ pipeline {
                     sh 'oc delete -f secret.yaml'
 		       }             
             }
-        }
-        stage('create volume') {
-            steps {
-                script {
-                    sh 'oc delete -f createvolume.yaml'
-		       }   
-            }
-        }		
+        }	
         stage('Deploy to Development') {
             steps {
                 script {

@@ -23,5 +23,3 @@ parameters:
   displayName: Claim-DB- Name
   name: DB_CLAIM_NAME
   value: mysql-pv-claim
-
-

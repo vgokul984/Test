@@ -1,0 +1,38 @@
+apiVersion: apps/v1 # for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
+kind: Deployment
+metadata:
+  name: ${APPLICATION}
+  labels:
+    app: ${APPLICATION}
+spec:
+  selector:
+    matchLabels:
+      app: ${APPLICATION}
+      tier: ${APP_TIER}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ${APPLICATION}
+        tier: ${APP_TIER}
+    spec:
+      containers:
+      - image: ${APP_IMAGE_NAME}:${APP_IMAGE_VERSION}
+        name: ${APPLICATION}
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
+        ports:
+        - containerPort: ${APP_PORT}
+          name: ${APPLICATION}
+        volumeMounts:
+        - name: ${APP_VOLUME_NAME}
+          mountPath: ${APP_MOUNT_POINT}
+      volumes:
+      - name: ${APP_VOLUME_NAME}
+        persistentVolumeClaim:
+          claimName: ${APP_CLAIM_NAME}

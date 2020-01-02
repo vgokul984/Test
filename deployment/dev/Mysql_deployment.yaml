@@ -1,25 +1,25 @@
 apiVersion: apps/v1 # for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
 kind: Deployment
 metadata:
-  name: wordpress-mysql
+  name: ${APPLICATION_NAME}
   labels:
-    app: wordpress
+    app: ${APPLICATION}
 spec:
   selector:
     matchLabels:
-      app: wordpress
-      tier: mysql
+      app: ${APPLICATION}
+      tier: ${DATABASE}
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: wordpress
-        tier: mysql
+        app: ${APPLICATION}
+        tier: ${DATABASE}
     spec:
       containers:
-      - image: mysql:5.6
-        name: mysql
+      - image: ${DATABASE}:${DB_VERSION}
+        name: ${DATABASE}
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
@@ -28,14 +28,14 @@ spec:
               key: password
         livenessProbe:
           tcpSocket:
-            port: 3306
+            port: ${DB_PORT}
         ports:
-        - containerPort: 3306
-          name: mysql
+        - containerPort: ${DB_PORT}
+          name: ${DATABASE}
         volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
+        - name: ${DB_VOLUME_NAME}
+          mountPath: ${DB_MOUNT_POINT}
       volumes:
-      - name: mysql-persistent-storage
+      - name: ${DB_VOLUME_NAME}
         persistentVolumeClaim:
-          claimName: mysql-pv-claim
+          claimName: ${DB_CLAIM_NAME}

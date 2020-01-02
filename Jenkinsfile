@@ -14,45 +14,29 @@ pipeline {
         stage('create secret') {
             steps {
                 script {
-                    openshift.withCluster() {
-					   openshift.withProject() {
-					     openshift.create(secret.yaml)
-						}
-					}
-				}             
+                    sh 'oc create secret.yaml'
+		       }             
             }
         }
         stage('create volume') {
             steps {
                 script {
-                    openshift.withCluster() {
-					   openshift.withProject() {
-					     openshift.create(createvolume.yaml)
-						}
-					}
-				}   
+                    sh 'oc create createvolume.yaml'
+		       }   
             }
         }		
         stage('Deploy to Development') {
             steps {
                 script {
-                    openshift.withCluster() {
-					   openshift.withProject() {
-					     openshift.create(deployment.yaml)
-						}
-					}
-				}   
+                    sh 'oc create deployment.yaml'
+		       }     
             }
         }
         stage('create Service') {
             steps {
                 script {
-                    openshift.withCluster() {
-					   openshift.withProject() {
-					     openshift.create(deployment.yaml)
-						}
-					}
-				}
+                    sh 'oc create serviceword.yaml'
+		       } 
             }
         }		
     }

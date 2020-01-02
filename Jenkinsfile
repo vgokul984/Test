@@ -15,7 +15,7 @@ pipeline {
         stage('create secret') {
             steps {
                 script {
-                    sh 'oc create -f secret.yaml'
+                    sh 'oc create -f ${DEV_PROJECT}/${ENV}/secret.yaml -n ${DEV_PROJECT}'
 		       }             
             }
         }

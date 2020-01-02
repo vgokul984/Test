@@ -16,4 +16,4 @@ APP_STORAGE=20Gi
 APP_IMAGE_VERSION=4.8-apache
 APP_IMAGE_NAME=wordpress
 APP_VOLUME_NAME=wordpress-persistent-storage
-APP_MOUNT_POINT=/var/www/html
+APP_MOUNT_POINT="/var/www/html"

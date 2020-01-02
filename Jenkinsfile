@@ -3,7 +3,7 @@ pipeline {
     environment {
         GIT_REPO="https://github.com/vgokul984/Test.git"
         GIT_BRANCH="master"
-		DEV_PROJECT = "development"
+	DEV_PROJECT = "development"
     }
     stages {
         stage('Get Latest Code') {
@@ -14,28 +14,28 @@ pipeline {
         stage('create secret') {
             steps {
                 script {
-                    sh 'oc create -f secret.yaml'
+                    sh 'oc delete -f secret.yaml'
 		       }             
             }
         }
         stage('create volume') {
             steps {
                 script {
-                    sh 'oc create -f createvolume.yaml'
+                    sh 'oc delete -f createvolume.yaml'
 		       }   
             }
         }		
         stage('Deploy to Development') {
             steps {
                 script {
-                    sh 'oc create -f deployment.yaml'
+                    sh 'oc delete -f deployment.yaml'
 		       }     
             }
         }
         stage('create Service') {
             steps {
                 script {
-                    sh 'oc create -f serviceword.yaml'
+                    sh 'oc delete -f serviceword.yaml'
 		       } 
             }
         }		

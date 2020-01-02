@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ${APPLICATION_NAME}
+  name: ${APPLICATION}
   labels:
     app: ${APPLICATION}
 spec:
@@ -11,3 +11,21 @@ spec:
     app: ${APPLICATION}
     tier: ${APP_TIER}
   type: ${APP_SEL_TYPE}
+parameters:
+- description: label-Application-name
+  displayName: label-Application-name
+  name: APPLICATION
+  value: wordpress
+- description: APP_PORT
+  displayName: APP_PORT
+  name: APP_PORT
+  value: 80
+- description: APP_SEL_TYPE
+  displayName: APP_SEL_TYPE
+  name: APP_SEL_TYPE
+  value: LoadBalancer
+- description: APP_TIER
+  displayName: APP_TIER
+  name: APP_TIER
+  value: frontend
+

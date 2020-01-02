@@ -11,13 +11,6 @@ pipeline {
                 git branch: "${GIT_BRANCH}", url: "${GIT_REPO}"
             }
         }
-        stage('create secret') {
-            steps {
-                script {
-                    sh 'oc delete -f secret.yaml'
-		       }             
-            }
-        }	
         stage('Deploy to Development') {
             steps {
                 script {

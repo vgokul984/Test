@@ -6,25 +6,25 @@ pipeline {
 	DEV_PROJECT = "deployment"
         PROJECT_NS = "development"
         ENV = "dev"
-	APPLICATION_NAME = wordpress-mysql
-        APPLICATION = wordpress
-        DATABASE = mysql
-        DB_VERSION = 5.6
-        DB_PORT = 3306
-        DB_VOLUME_NAME = mysql-persistent-storage
-        DB_MOUNT_POINT = /var/lib/mysql
-        DB_CLAIM_NAME = mysql-pv-claim
-        DB_STORAGE = 20Gi
-        NAMESPACE = development
-        APP_PORT = 80
-        APP_TIER = frontend
-        APP_SEL_TYPE = LoadBalancer
-        APP_CLAIM_NAME = wp-pv-claim
-        APP_STORAGE = 20Gi
-        APP_IMAGE_VERSION = 4.8-apache
-        APP_IMAGE_NAME = wordpress
-        APP_VOLUME_NAME = wordpress-persistent-storage
-	APP_MOUNT_POINT = /var/www/html
+	APPLICATION_NAME = "wordpress-mysql"
+        APPLICATION = "wordpress"
+        DATABASE = "mysql"
+        DB_VERSION = "5.6"
+        DB_PORT = "3306"
+        DB_VOLUME_NAME = "mysql-persistent-storage"
+        DB_MOUNT_POINT = "/var/lib/mysql"
+        DB_CLAIM_NAME = "mysql-pv-claim"
+        DB_STORAGE = "20Gi"
+        NAMESPACE = "development"
+        APP_PORT = "80"
+        APP_TIER = "frontend"
+        APP_SEL_TYPE = "LoadBalancer"
+        APP_CLAIM_NAME = "wp-pv-claim"
+        APP_STORAGE = "20Gi"
+        APP_IMAGE_VERSION = "4.8-apache"
+        APP_IMAGE_NAME = "wordpress"
+        APP_VOLUME_NAME = "wordpress-persistent-storage"
+	APP_MOUNT_POINT = "/var/www/html"
     }
     stages {
         stage('Get Latest Code') {

@@ -23,7 +23,7 @@ pipeline {
         stage('create MySQl_volume') {
             steps {
                 script {
-                    sh 'oc create -f ${DEV_PROJECT}/${ENV}/Mysql_deployment.yaml -n ${PROJECT_NS}'
+                    sh 'oc create -f ${DEV_PROJECT}/${ENV}/Mysql_createvolume.yaml -n ${PROJECT_NS}'
 		       }   
             }
         }		

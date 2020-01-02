@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ${DB_CLAIM_NAME}
+  name: "${DB_CLAIM_NAME}"
   labels:
-    app: ${APPLICATION}
+    app: "${APPLICATION}"
 spec:
   accessModes:
     - ReadWriteOnce

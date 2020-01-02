@@ -14,28 +14,28 @@ pipeline {
         stage('create secret') {
             steps {
                 script {
-                    sh 'oc create secret.yaml'
+                    sh 'oc create -f secret.yaml'
 		       }             
             }
         }
         stage('create volume') {
             steps {
                 script {
-                    sh 'oc create createvolume.yaml'
+                    sh 'oc create -f createvolume.yaml'
 		       }   
             }
         }		
         stage('Deploy to Development') {
             steps {
                 script {
-                    sh 'oc create deployment.yaml'
+                    sh 'oc create -f deployment.yaml'
 		       }     
             }
         }
         stage('create Service') {
             steps {
                 script {
-                    sh 'oc create serviceword.yaml'
+                    sh 'oc create -f serviceword.yaml'
 		       } 
             }
         }		

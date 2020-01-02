@@ -39,3 +39,38 @@ spec:
       - name: ${DB_VOLUME_NAME}
         persistentVolumeClaim:
           claimName: ${DB_CLAIM_NAME}
+parameters:
+- description: APPLICATION_NAME
+  displayName: APPLICATION_NAME
+  name: APPLICATION_NAME
+  value: wordpress-mysql
+- description: Application-name
+  displayName: label-Application-name
+  name: APPLICATION
+  value: wordpress
+- description: Claim name
+  displayName: Claim-DB- Name
+  name: DB_CLAIM_NAME
+  value: mysql-pv-claim
+- description: DATABASE
+  displayName: DATABASE
+  name: DATABASE
+  value: mysql
+- description: DB_VERSION
+  displayName: DB_VERSION
+  name: DB_VERSION
+  value: 5.6
+- description: DB_VOLUME_NAME
+  displayName: DB_VOLUME_NAME
+  name: DB_VOLUME_NAME
+  value: mysql-persistent-storage
+- description: DB_MOUNT_POINT
+  displayName: DB_MOUNT_POINT
+  name: DB_MOUNT_POINT
+  value: /var/lib/mysql
+- description: DB_PORT
+  displayName: DB_PORT
+  name: DB_PORT
+  value: 3306
+
+

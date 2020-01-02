@@ -11,3 +11,22 @@ spec:
     app: ${APPLICATION}
     tier: ${DATABASE}
   clusterIP: None
+parameters:
+- description: APPLICATION_NAME
+  displayName: APPLICATION_NAME
+  name: APPLICATION_NAME
+  value: wordpress-mysql
+- description: label-Application-name
+  displayName: label-Application-name
+  name: APPLICATION
+  value: wordpress
+- description: DATABASE
+  displayName: DATABASE
+  name: DATABASE
+  value: mysql
+- description: DB_PORT
+  displayName: DB_PORT
+  name: DB_PORT
+  value: 3306
+
+

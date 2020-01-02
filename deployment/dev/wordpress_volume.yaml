@@ -9,4 +9,18 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi
+      storage: ${DB_STORAGE}
+parameters:
+- description: Volume space available for data, e.g. 512Mi, 2Gi
+  displayName: Volume Capacity
+  name: DB_STORAGE
+  value: 20Gi
+- description: Application-name
+  displayName: label-Application-name
+  name: APPLICATION
+  value: wordpress
+- description: Claim name
+  displayName: Claim-DB- Name
+  name: DB_CLAIM_NAME
+  value: mysql-pv-claim
+

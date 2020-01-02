@@ -19,7 +19,7 @@ parameters:
   displayName: label-Application-name
   name: APPLICATION
   value: wordpress
-- description: Application name
+- description: Claim name
   displayName: Claim-DB- Name
   name: DB_CLAIM_NAME
   value: mysql-pv-claim

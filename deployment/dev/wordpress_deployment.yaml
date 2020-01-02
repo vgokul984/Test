@@ -36,3 +36,39 @@ spec:
       - name: ${APP_VOLUME_NAME}
         persistentVolumeClaim:
           claimName: ${APP_CLAIM_NAME}
+parameters:
+- description: label-Application-name
+  displayName: label-Application-name
+  name: APPLICATION
+  value: wordpress
+- description: Claim name
+  displayName: Claim-APP- Name
+  name: APP_CLAIM_NAME
+  value: wp-pv-claim
+- description: APP_TIER
+  displayName: APP_TIER
+  name: APP_TIER
+  value: frontend
+- description: APP_IMAGE_NAME
+  displayName: APP_IMAGE_NAME
+  name: APP_IMAGE_NAME
+  value: wordpress
+- description: APP_IMAGE_VERSION
+  displayName: APP_IMAGE_VERSION
+  name: APP_IMAGE_VERSION
+  value: 4.8-apache
+- description: APP_PORT
+  displayName: APP_PORT
+  name: APP_PORT
+  value: 80 
+- description: APP_VOLUME_NAME
+  displayName: APP_VOLUME_NAME
+  name: APP_VOLUME_NAME
+  value: wordpress-persistent-storage
+- description: APP_MOUNT_POINT
+  displayName: APP_MOUNT_POINT
+  name: APP_MOUNT_POINT
+  value: /var/www/html
+
+
+

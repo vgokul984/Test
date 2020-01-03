@@ -1,26 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ${APP_CLAIM_NAME}
+  name: wp-pv-claim
   labels:
-    app: ${APPLICATION}
+    app: wordpress
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: ${DB_STORAGE}
-parameters:
-- description: Volume space available for data, e.g. 512Mi, 2Gi
-  displayName: Volume Capacity
-  name: DB_STORAGE
-  value: 20Gi
-- description: Application-name
-  displayName: label-Application-name
-  name: APPLICATION
-  value: wordpress
-- description: Claim name
-  displayName: Claim-DB- Name
-  name: DB_CLAIM_NAME
-  value: mysql-pv-claim
-
+      storage: 20Gi

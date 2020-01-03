@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ${DB_CLAIM_NAME}
+  name: mysql-pv-claim
   labels:
     app: wordpress
 spec:
@@ -9,4 +9,4 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: ${DB_STORAGE}
+      storage: 20Gi

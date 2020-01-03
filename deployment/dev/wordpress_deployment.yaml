@@ -1,74 +1,43 @@
-apiVersion: apps/v1 # for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
+apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
 kind: Deployment
 metadata:
-  name: ${APPLICATION}
+  name: wordpress
   labels:
-    app: ${APPLICATION}
+    app: wordpress
 spec:
   selector:
     matchLabels:
-      app: ${APPLICATION}
-      tier: ${APP_TIER}
+      app: wordpress
+      tier: frontend
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: ${APPLICATION}
-        tier: ${APP_TIER}
+        app: wordpress
+        tier: frontend
     spec:
       containers:
-      - image: ${APP_IMAGE_NAME}:${APP_IMAGE_VERSION}
-        name: ${APPLICATION}
+      - image: wordpress:4.8-apache
+        name: wordpress
         env:
-        - name: MYSQL_ROOT_PASSWORD
+        - name: WORDPRESS_DB_HOST
+          value: wordpress-mysql
+        - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mysql-pass
               key: password
         ports:
-        - containerPort: ${APP_PORT}
-          name: ${APPLICATION}
+        - containerPort: 80
+          name: wordpress
         volumeMounts:
-        - name: ${APP_VOLUME_NAME}
-          mountPath: ${APP_MOUNT_POINT}
+        - name: wordpress-persistent-storage
+          mountPath: /var/www/html
       volumes:
-      - name: ${APP_VOLUME_NAME}
+      - name: wordpress-persistent-storage
         persistentVolumeClaim:
-          claimName: ${APP_CLAIM_NAME}
-parameters:
-- description: label-Application-name
-  displayName: label-Application-name
-  name: APPLICATION
-  value: wordpress
-- description: Claim name
-  displayName: Claim-APP- Name
-  name: APP_CLAIM_NAME
-  value: wp-pv-claim
-- description: APP_TIER
-  displayName: APP_TIER
-  name: APP_TIER
-  value: frontend
-- description: APP_IMAGE_NAME
-  displayName: APP_IMAGE_NAME
-  name: APP_IMAGE_NAME
-  value: wordpress
-- description: APP_IMAGE_VERSION
-  displayName: APP_IMAGE_VERSION
-  name: APP_IMAGE_VERSION
-  value: 4.8-apache
-- description: APP_PORT
-  displayName: APP_PORT
-  name: APP_PORT
-  value: 80 
-- description: APP_VOLUME_NAME
-  displayName: APP_VOLUME_NAME
-  name: APP_VOLUME_NAME
-  value: wordpress-persistent-storage
-- description: APP_MOUNT_POINT
-  displayName: APP_MOUNT_POINT
-  name: APP_MOUNT_POINT
-  value: /var/www/html
+          claimName: wp-pv-claim
 
 
 

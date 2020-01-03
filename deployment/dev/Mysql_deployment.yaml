@@ -1,25 +1,25 @@
 apiVersion: apps/v1 # for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
 kind: Deployment
 metadata:
-  name: ${APPLICATION_NAME}
+  name: wordpress-mysql
   labels:
-    app: ${APPLICATION}
+    app: wordpress
 spec:
   selector:
     matchLabels:
-      app: ${APPLICATION}
-      tier: ${DATABASE}
+      app: wordpress
+      tier: mysql
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: ${APPLICATION}
-        tier: ${DATABASE}
+        app: wordpress
+        tier: mysql
     spec:
       containers:
-      - image: ${DATABASE}:${DB_VERSION}
-        name: ${DATABASE}
+      - image: mysql:5.6
+        name: mysql
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
@@ -28,49 +28,15 @@ spec:
               key: password
         livenessProbe:
           tcpSocket:
-            port: ${DB_PORT}
+            port: 3306
         ports:
-        - containerPort: ${DB_PORT}
-          name: ${DATABASE}
+        - containerPort: 3306
+          name: mysql
         volumeMounts:
-        - name: ${DB_VOLUME_NAME}
-          mountPath: ${DB_MOUNT_POINT}
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
       volumes:
-      - name: ${DB_VOLUME_NAME}
+      - name: mysql-persistent-storage
         persistentVolumeClaim:
-          claimName: ${DB_CLAIM_NAME}
-parameters:
-- description: APPLICATION_NAME
-  displayName: APPLICATION_NAME
-  name: APPLICATION_NAME
-  value: wordpress-mysql
-- description: Application-name
-  displayName: label-Application-name
-  name: APPLICATION
-  value: wordpress
-- description: Claim name
-  displayName: Claim-DB- Name
-  name: DB_CLAIM_NAME
-  value: mysql-pv-claim
-- description: DATABASE
-  displayName: DATABASE
-  name: DATABASE
-  value: mysql
-- description: DB_VERSION
-  displayName: DB_VERSION
-  name: DB_VERSION
-  value: 5.6
-- description: DB_VOLUME_NAME
-  displayName: DB_VOLUME_NAME
-  name: DB_VOLUME_NAME
-  value: mysql-persistent-storage
-- description: DB_MOUNT_POINT
-  displayName: DB_MOUNT_POINT
-  name: DB_MOUNT_POINT
-  value: /var/lib/mysql
-- description: DB_PORT
-  displayName: DB_PORT
-  name: DB_PORT
-  value: 3306
-
+          claimName: mysql-pv-claim
 

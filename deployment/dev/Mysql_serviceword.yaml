@@ -1,32 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ${APPLICATION_NAME}
+  name: wordpress-mysql
   labels:
-    app: ${APPLICATION}
+    app: wordpress
 spec:
   ports:
-    - port: ${DB_PORT}
+    - port: 3306
   selector:
-    app: ${APPLICATION}
-    tier: ${DATABASE}
+    app: wordpress
+    tier: mysql
   clusterIP: None
-parameters:
-- description: APPLICATION_NAME
-  displayName: APPLICATION_NAME
-  name: APPLICATION_NAME
-  value: wordpress-mysql
-- description: label-Application-name
-  displayName: label-Application-name
-  name: APPLICATION
-  value: wordpress
-- description: DATABASE
-  displayName: DATABASE
-  name: DATABASE
-  value: mysql
-- description: DB_PORT
-  displayName: DB_PORT
-  name: DB_PORT
-  value: 3306
-
 
